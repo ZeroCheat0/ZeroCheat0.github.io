@@ -1,14 +1,43 @@
 
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Get Key</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Key</title>
 </head>
-<body style="text-align:center; margin-top:100px;">
-  <h1>Nhấn để nhận mã</h1>
-  <a href="https://link4m.co/st?api=647b1ddd6a97f84d0308201b&url=https://link4m.co/st?api=647b1ddd6a97f84d0308201b&url=https://zerocheat0.github.io/key.html">
-    <button style="padding: 15px 30px; font-size: 20px;">Get Key</button>
-  </a>
+<body>
+    <button id="getKeyButton">Get Key</button>
+    <p id="keyDisplay" style="display:none;"></p>
+    <button id="copyButton" style="display:none;">Copy Key</button>
+
+    <script>
+        document.getElementById('getKeyButton').addEventListener('click', async function() {
+            // Gửi yêu cầu API đầu tiên
+            await fetch('https://link4m.co/st?api=647b1ddd6a97f84d0308201b&url=')
+                .then(response => response.json())
+                .then(data => console.log(data));
+
+            // Gửi yêu cầu API thứ hai
+            await fetch('https://link4m.co/st?api=647b1ddd6a97f84d0308201b&url=')
+                .then(response => response.json())
+                .then(data => console.log(data));
+
+            // Tạo mã ngẫu nhiên
+            const key = 'zerocheat-' + Math.random().toString(36).substring(2, 8);
+            
+            // Hiển thị mã và nút sao chép
+            document.getElementById('keyDisplay').textContent = key;
+            document.getElementById('keyDisplay').style.display = 'block';
+            document.getElementById('copyButton').style.display = 'block';
+            
+            // Sao chép mã vào clipboard
+            document.getElementById('copyButton').addEventListener('click', function() {
+                navigator.clipboard.writeText(key).then(() => {
+                    alert('Key copied to clipboard!');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
